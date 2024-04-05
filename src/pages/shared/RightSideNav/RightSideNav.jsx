@@ -1,15 +1,26 @@
 import { FaFacebook, FaGithub, FaGoogle, FaInstagram, FaTwitter } from "react-icons/fa";
-
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import qzoon1 from '../../../assets/qZone1.png'
 import qzoon2 from '../../../assets/qZone2.png'
 import qzoon3 from '../../../assets/qZone3.png'
+import app from "../../../firebase/firebase.config";
 
 const RightSideNav = () => {
+
+    const googleProvider = new GoogleAuthProvider()
+    const auth = getAuth(app)
+
+    const handleGoogleLogin =() => {
+        signInWithPopup(auth, googleProvider)
+    }
     return (
         <div>
             <div className="p-4 mb-5">
                 <h2 className="text3xl">Login</h2>
-                <button className="btn btn-outline w-full mb-4">
+                <button 
+                onClick={handleGoogleLogin}
+                className="btn btn-outline w-full mb-4">
                     <FaGoogle></FaGoogle>
                     Google
                 </button>
